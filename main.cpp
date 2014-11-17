@@ -1,7 +1,9 @@
 /*
-    Name: Pig-Latin Encoder
+    Name: Homework 5
 
     Author: Dovi Salomon
+
+    Date Due: 12-2-2014
 
     Description: Reads in a file and prints a pig-latin version to
                  a file. The program leaves all whitespace and
@@ -36,13 +38,16 @@ int main ()
     int i=0; //setting the array index to first position
 
     c = gettyburg.get();
+
+    //Skipping whitespace and punctuation in the beginning of the
+    //file
+    while (!isalpha(c)) {
+        outfile.put(c);
+        charCount++;
+        c = gettyburg.get();
+    }
+
     while ( !gettyburg.eof() ) {
-        //Skipping whitespace and punctuation before a word
-        while (!isalpha(c)) {
-            outfile.put(c);
-            charCount++;
-            c = gettyburg.get();
-        }
 
         //reading a word into the array
         while (isalpha(c)) {
@@ -53,7 +58,7 @@ int main ()
 
         //If word begins in uppercase make the second word uppercase
         //and first letter to the end as lowercase.
-        if ( isupper(word[0]) ) {
+        if ( isupper(word[0]) && i != 1 ) {
             word[1] = toupper(word[1]);
             word[i] = tolower(word[0]);
         }
@@ -84,7 +89,7 @@ int main ()
     //Final Report:
     outfile << endl << "Word Count: " << wordCount << endl;
     outfile << "Letter Count: " << letterCount << endl;
-    outfile << "Character Count: " << charCount + letterCount << endl;
+    outfile << "Character Count: " << charCount+letterCount << endl;
 
     //Message for the console:
     cout << endl
